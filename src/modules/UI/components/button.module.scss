@@ -1,0 +1,41 @@
+@import 'src/stylesheets';
+
+$_background: $color-pressed-hover;
+$_background-hover: $color-pressed;
+$_color-text: $color-primary-alt;
+
+.self {
+  background: $_background;
+  border: 1px solid rgba(#fff, 0.4);
+  color: $_color-text;
+  color: $_color-text;
+  font-size: 16px;
+  font-weight: normal;
+  padding: 10px 25px;
+  transition: $transition-duration-hover all;
+
+  &:hover {
+    background: $_background-hover;
+    border-color: rgba(#fff, 0.8);
+  }
+}
+
+.tSecondary {
+  background-color: #4a4;
+}
+
+.tNoBackground,
+.tNoBackground:hover,
+.tNoBackground:focus {
+  background-color: transparent;
+  border: unset;
+  outline: unset;
+
+  &::before {
+    background-color: transparent;
+  }
+}
+
+.tTransparent {
+  background-color: transparent;
+}

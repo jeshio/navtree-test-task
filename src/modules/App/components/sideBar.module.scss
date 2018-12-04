@@ -1,0 +1,65 @@
+@import 'src/stylesheets';
+
+$item-color: #8c99d6;
+$item-background-hover: #fafaff;
+
+.self {
+  $animation-duration: 0.1s;
+  background-color: #fff;
+  bottom: 0;
+  left: 100%;
+  padding-top: 60px;
+  position: fixed;
+  right: -100%;
+  top: 0;
+  transition: right $animation-duration, left $animation-duration;
+  z-index: 999;
+
+  @include bp(medium-up) {
+    left: unset;
+    padding-top: 75px;
+    position: relative;
+    right: unset;
+    width: 280px;
+  }
+
+  @include bp(large-up) {
+    padding-top: 90px;
+  }
+
+  @include bp(xlarge-up) {
+    padding-top: 100px;
+  }
+}
+
+.selfIsOpen {
+  left: 68px;
+  right: 0;
+}
+
+.list {
+}
+
+.item {
+  $borders-color: darken($item-background-hover, 1%);
+  border-bottom: 1px solid;
+  border-color: $borders-color;
+  text-transform: lowercase;
+
+  &:last-child {
+    border-bottom: unset;
+  }
+}
+
+.itemLink {
+  color: $item-color;
+  display: block;
+  font-weight: bold;
+  padding: 20px 10px;
+
+  &:hover,
+  &:focus {
+    background-color: $item-background-hover;
+    color: darken($item-color, 10%);
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "moduleResolution": "node",
+    "paths": {
+      "@*": ["*"],
+      "@ui-components/*": ["modules/UI/components/*"],
+      "@ui-components": ["modules/UI/components/index"]
+    }
+  }
+}

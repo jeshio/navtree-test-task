@@ -1,0 +1,63 @@
+@import 'src/stylesheets';
+
+$_background: $color-primary;
+$_items-text-color: #fff;
+$item-hover-transition-duration: 0.3s;
+
+.self {
+  background-color: $_background;
+  color: $color-primary-text;
+  height: 60px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  @include bp(medium-up) {
+    height: 75px;
+  }
+
+  @include bp(large-up) {
+    height: 90px;
+  }
+
+  @include bp(xlarge-up) {
+    height: 100px;
+  }
+}
+
+.selfInner {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 0 10px;
+}
+
+.logo {
+  align-items: center;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  font-size: 1.6em;
+  justify-content: left;
+  line-height: 128px;
+  padding-left: 5px;
+}
+
+.burger {
+  flex: 2;
+  text-align: right;
+}
+
+.burgerButton {
+  @include size(48px);
+  color: $_items-text-color;
+  padding: 0;
+
+  svg {
+    @include size(28px);
+  }
+}
