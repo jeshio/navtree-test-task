@@ -1,15 +1,13 @@
-import { MenuItem } from "@modules/App/interfaces";
 import { Button, Link, List } from "@ui-components/index";
 import classnames from "classnames";
 import * as React from "react";
 import { FaBars, FaRocket } from "react-icons/fa/";
 import styles from "./topBar.module.scss";
 interface ITopBarProps {
-  items: MenuItem[];
   onToggleSideBar: () => void;
 }
 
-const TopBar: React.SFC<ITopBarProps> = ({ items, onToggleSideBar }) => {
+const TopBar: React.SFC<ITopBarProps> = ({ onToggleSideBar }) => {
   return (
     <header className={styles.self}>
       <nav className={styles.selfInner}>

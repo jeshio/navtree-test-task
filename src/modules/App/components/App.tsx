@@ -5,7 +5,7 @@ interface IAppProps {
   topBarComponent: JSX.Element;
   sideBarComponent: JSX.Element;
   layoutComponent: JSX.Element;
-  children: any;
+  children: React.ReactNode | undefined;
 }
 
 const App: React.SFC<IAppProps> = ({

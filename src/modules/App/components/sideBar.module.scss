@@ -44,7 +44,6 @@ $item-background-hover: #fafaff;
   $borders-color: darken($item-background-hover, 1%);
   border-bottom: 1px solid;
   border-color: $borders-color;
-  text-transform: lowercase;
 
   &:last-child {
     border-bottom: unset;

@@ -1,6 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as Components from "./components";
+import { MENU_ITEMS } from "./constants";
+
 export interface IAppProps {}
 
 export interface IAppState {
@@ -8,14 +10,6 @@ export interface IAppState {
 }
 
 class App extends React.Component<IAppProps, IAppState> {
-  get menuItems() {
-    return [
-      {
-        title: "Пункт 1",
-        link: "/item1"
-      }
-    ];
-  }
   constructor(props) {
     super(props);
     this.state = {
@@ -31,14 +25,11 @@ class App extends React.Component<IAppProps, IAppState> {
     return (
       <Components.App
         topBarComponent={
-          <Components.TopBar
-            items={this.menuItems}
-            onToggleSideBar={this.toggleSideBar}
-          />
+          <Components.TopBar onToggleSideBar={this.toggleSideBar} />
         }
         sideBarComponent={
           <Components.SideBar
-            items={this.menuItems}
+            items={MENU_ITEMS}
             isOpen={sidebarIsOpen}
             onClickLink={this.toggleSideBar}
           />

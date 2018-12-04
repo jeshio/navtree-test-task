@@ -14,17 +14,17 @@ const SideBar: React.SFC<ISideBarProps> = ({ items, isOpen, onClickLink }) => {
   return (
     <aside className={classnames(styles.self, { [styles.selfIsOpen]: isOpen })}>
       <List
-        items={items.map(({ title, link }) => (
+        items={items.map(({ title, name }) => (
           <span>
             <Link
-              href={link}
+              href={`/${name}`}
               className={classnames(styles.itemLink, "u-show-small")}
               onClick={onClickLink}
             >
               {title}
             </Link>
             <Link
-              href={link}
+              href={`/${name}`}
               className={classnames(styles.itemLink, "u-hide-small")}
             >
               {title}

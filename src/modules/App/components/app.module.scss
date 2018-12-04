@@ -6,12 +6,15 @@
 }
 
 .content {
+  background-color: #fff;
   margin-top: 60px;
+  min-height: 300px;
   padding: 10px;
   padding-top: 20px;
+  width: 100%;
 
   @include bp(medium-up) {
-    margin-top: 0;
+    margin-top: 75px;
   }
 
   @include bp(large-up) {

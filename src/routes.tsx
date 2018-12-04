@@ -6,7 +6,12 @@ import * as Pages from "./pages";
 export default (
   <Switch>
     <AppContainer>
-      <Route exact={true} path="/" component={Pages.Home} />
+      <Switch>
+        <Route exact={true} path="/" component={Pages.Home} />
+        <Route path="/:menuItem" component={Pages.Section} />
+        <Route path="/:menuItem/:sectionId" component={Pages.Section} />
+        <Route component={Pages.NoMatch} />
+      </Switch>
     </AppContainer>
   </Switch>
 );
