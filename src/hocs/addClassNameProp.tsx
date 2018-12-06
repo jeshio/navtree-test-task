@@ -1,13 +1,20 @@
 import classnames from "classnames";
-import { string } from "prop-types";
 import React from "react";
+
+interface IInjectedProps {
+  className?: string;
+}
 
 /**
  * Add className without overriding
  */
-export default (defaultClassName = "") => Component => ({
-  className = "",
-  ...props
-}) => (
-  <Component {...props} className={classnames(defaultClassName, className)} />
-);
+export default function<T extends any>(defaultClassName = "") {
+  type WrappedComponent = React.ComponentType<IInjectedProps & T>;
+
+  return (Component: React.ComponentType<T>): WrappedComponent => ({
+    className = "",
+    ...props
+  }: IInjectedProps) => (
+    <Component {...props} className={classnames(defaultClassName, className)} />
+  );
+}

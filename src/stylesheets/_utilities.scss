@@ -1,3 +1,9 @@
+.u-loader {
+  & > div {
+    background-color: #2769cd;
+  }
+}
+
 .u-hide {
   display: none !important;
 }

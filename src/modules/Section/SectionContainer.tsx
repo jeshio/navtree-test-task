@@ -10,11 +10,20 @@ import * as Components from "./components";
 import { Section } from "./interfaces";
 import * as store from "./store";
 
-export interface ISectionContainerProps extends IStateProps, IDispatchProps {}
+export interface ISectionContainerProps extends IStateProps, IDispatchProps {
+  match: {
+    params: {
+      menuItem: string;
+      sectionId: string;
+    };
+  };
+}
 
 class SectionContainer extends React.Component<ISectionContainerProps, any> {
-  public componentDidMount() {
-    this.props.fetchSectionForMenuItem("menu-item-1");
+  constructor(props) {
+    super(props);
+
+    this.loadSection = this.loadSection.bind(this);
   }
 
   public render() {
@@ -24,7 +33,33 @@ class SectionContainer extends React.Component<ISectionContainerProps, any> {
       return null;
     }
 
-    return <Components.Section />;
+    return (
+      <Components.Section title={currentSection.title} loading={loading} />
+    );
+  }
+
+  public componentDidMount() {
+    const { menuItem, sectionId } = this.props.match.params;
+    this.loadSection(menuItem, sectionId);
+  }
+
+  public shouldComponentUpdate(nextProps: ISectionContainerProps): boolean {
+    const { menuItem, sectionId } = this.props.match.params;
+    const { params } = nextProps.match;
+
+    if (menuItem !== params.menuItem || sectionId !== params.sectionId) {
+      this.loadSection(params.menuItem, params.sectionId);
+    }
+
+    return true;
+  }
+
+  protected loadSection(menuItem: string, sectionId: string) {
+    if (sectionId) {
+      this.props.fetchSectionById(parseInt(sectionId, 10));
+    } else {
+      this.props.fetchSectionForMenuItem(menuItem);
+    }
   }
 }
 

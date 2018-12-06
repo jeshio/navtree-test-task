@@ -57,7 +57,8 @@ export const sections: Section[] = [
   section8
 ];
 
-export const getSectionById = searchId => sections.find(({ id }) => searchId);
+export const getSectionById = (searchId): Section | undefined =>
+  sections.find(({ id }) => searchId === id);
 
 export const sectionsForMenuItems = {
   "menu-item-1": getSectionById(1),
