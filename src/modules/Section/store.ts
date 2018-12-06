@@ -3,7 +3,7 @@ import { ActionWithPayload } from "@interfaces/ActionWithPayload";
 import { string } from "prop-types";
 import { Action, ActionCreator, AnyAction, Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { ActionType, getType } from "typesafe-actions";
+import { ActionType, createAction, getType } from "typesafe-actions";
 import { ActionCreatorMap } from "typesafe-actions/dist/types";
 import { MODULE_NAME } from "./constants";
 import { Section } from "./interfaces";
@@ -64,6 +64,12 @@ export default function reducer(
         stack: [section]
       };
     }
+
+    case getType(sectionsStackPop):
+      return {
+        ...state,
+        stack: state.stack.slice(0, -1)
+      };
     default:
       return state;
   }
@@ -103,9 +109,12 @@ const fetchSectionById = (id: number) => async dispatch => {
   dispatch(asyncActions.fetchSectionById.success(payload));
 };
 
+const sectionsStackPop = createAction(`${MODULE_NAME}/SECTIONS_STACK_POP`);
+
 export const actions = {
   fetchSectionById,
-  fetchSectionForMenuItem
+  fetchSectionForMenuItem,
+  sectionsStackPop
 };
 
 /**
@@ -120,5 +129,6 @@ export const selectors = {
       ? moduleState.stack[moduleState.stack.length - 1]
       : undefined;
   },
-  loading: (state: IState): boolean => getModuleState(state).loading
+  loading: (state: IState): boolean => getModuleState(state).loading,
+  sectionsStack: (state): Section[] => getModuleState(state).stack
 };

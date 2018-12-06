@@ -1,5 +1,8 @@
+import { History } from "history";
+import { object } from "prop-types";
 import * as React from "react";
 import { connect } from "react-redux";
+import { Router } from "react-router";
 import {
   ActionCreatorsMapObject,
   AnyAction,
@@ -23,13 +26,27 @@ export interface ISectionContainerProps extends IStateProps, IDispatchProps {
   };
 }
 
+interface ISectionContainerContext {
+  router: {
+    history: History;
+    route: Router;
+  };
+}
+
 class SectionContainer extends React.Component<
   ISectionContainerProps & IDefaultProps,
   any
 > {
+  public static contextTypes = {
+    router: object
+  };
+
   public static defaultProps: IDefaultProps = {
     currentSection: {}
   };
+
+  public context!: ISectionContainerContext;
+
   constructor(props) {
     super(props);
 
@@ -63,9 +80,22 @@ class SectionContainer extends React.Component<
   public shouldComponentUpdate(nextProps: ISectionContainerProps): boolean {
     const { menuItem, sectionId } = this.props.match.params;
     const { params } = nextProps.match;
+    const menuItemIsChanged = menuItem !== params.menuItem;
+    const sectionIdIsChanged = sectionId !== params.sectionId;
+    const paramsIsChanged = menuItemIsChanged || sectionIdIsChanged;
 
-    if (menuItem !== params.menuItem || sectionId !== params.sectionId) {
-      this.loadSection(params.menuItem, params.sectionId);
+    if (paramsIsChanged) {
+      const { action } = this.context.router.history;
+      const { sectionsStack, sectionsStackPop } = nextProps;
+      const isNoBack = action !== "POP";
+      const stackNoPop = sectionsStack.length <= 1;
+
+      const needToLoadSection = menuItemIsChanged || isNoBack || stackNoPop;
+      if (needToLoadSection) {
+        this.loadSection(params.menuItem, params.sectionId);
+      } else {
+        sectionsStackPop();
+      }
     }
 
     return true;
@@ -83,25 +113,25 @@ class SectionContainer extends React.Component<
 interface IStateProps {
   currentSection?: Section;
   loading: boolean;
+  sectionsStack: Section[];
 }
 
 const mapState2Props = (state): IStateProps => {
   return {
     currentSection: store.selectors.currentSection(state),
-    loading: store.selectors.loading(state)
+    loading: store.selectors.loading(state),
+    sectionsStack: store.selectors.sectionsStack(state)
   };
 };
 
 interface IDispatchProps {
   fetchSectionById: typeof store.actions.fetchSectionById;
   fetchSectionForMenuItem: typeof store.actions.fetchSectionForMenuItem;
+  sectionsStackPop: typeof store.actions.sectionsStackPop;
 }
 
-const mapDispatch2Props = dispatch => ({
-  fetchSectionById: id => dispatch(store.actions.fetchSectionById(id)),
-  fetchSectionForMenuItem: id =>
-    dispatch(store.actions.fetchSectionForMenuItem(id))
-});
+const mapDispatch2Props = dispatch =>
+  bindActionCreators(store.actions, dispatch);
 
 export default connect(
   mapState2Props,

@@ -62,6 +62,5 @@ export const getSectionById = (searchId): Section | undefined =>
 
 export const sectionsForMenuItems = {
   "menu-item-1": getSectionById(1),
-  "menu-item-2": getSectionById(2),
-  "menu-item-3": getSectionById(5)
+  "menu-item-2": getSectionById(5)
 };

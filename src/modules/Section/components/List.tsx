@@ -2,20 +2,13 @@ import { Link } from "@ui-components";
 import * as React from "react";
 import { Section } from "../interfaces";
 
-interface IDefaultProps {
+export interface IListProps {
+  index: string;
+  menuItem: string;
   list?: Section[];
 }
 
-export interface IListProps extends Partial<IDefaultProps> {
-  index: string;
-  menuItem: string;
-}
-
-const List: React.SFC<IListProps & IDefaultProps> = ({
-  list = [],
-  menuItem,
-  index
-}) => {
+const List: React.SFC<IListProps> = ({ list = [], menuItem, index }) => {
   return (
     <div>
       <h3>List {index}</h3>
