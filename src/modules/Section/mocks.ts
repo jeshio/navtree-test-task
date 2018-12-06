@@ -2,42 +2,42 @@ import { Section } from "./interfaces";
 
 const section1: Section = {
   id: 1,
-  title: "Section1.1"
+  index: "1.1"
 };
 
 const section2: Section = {
   id: 2,
-  title: "Section1.2"
+  index: "1.2"
 };
 
 const section3: Section = {
   id: 3,
-  title: "Section1.3"
+  index: "1.3"
 };
 
 const section4: Section = {
   id: 4,
-  title: "Section1.4"
+  index: "1.4"
 };
 
 const section5: Section = {
   id: 5,
-  title: "Section2.1"
+  index: "2.1"
 };
 
 const section6: Section = {
   id: 6,
-  title: "Section2.2"
+  index: "2.2"
 };
 
 const section7: Section = {
   id: 7,
-  title: "Section2.3"
+  index: "2.3"
 };
 
 const section8: Section = {
   id: 8,
-  title: "Section2.4"
+  index: "2.4"
 };
 
 export const sections: Section[] = [

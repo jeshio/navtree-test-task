@@ -10,6 +10,10 @@ import * as Components from "./components";
 import { Section } from "./interfaces";
 import * as store from "./store";
 
+interface IDefaultProps {
+  currentSection: object;
+}
+
 export interface ISectionContainerProps extends IStateProps, IDispatchProps {
   match: {
     params: {
@@ -19,7 +23,13 @@ export interface ISectionContainerProps extends IStateProps, IDispatchProps {
   };
 }
 
-class SectionContainer extends React.Component<ISectionContainerProps, any> {
+class SectionContainer extends React.Component<
+  ISectionContainerProps & IDefaultProps,
+  any
+> {
+  public static defaultProps: IDefaultProps = {
+    currentSection: {}
+  };
   constructor(props) {
     super(props);
 
@@ -28,13 +38,20 @@ class SectionContainer extends React.Component<ISectionContainerProps, any> {
 
   public render() {
     const { loading, currentSection } = this.props;
-
-    if (!currentSection) {
-      return null;
-    }
+    const { menuItem } = this.props.match.params;
 
     return (
-      <Components.Section title={currentSection.title} loading={loading} />
+      <Components.Section
+        index={currentSection.index}
+        loading={loading}
+        listComponent={
+          <Components.List
+            index={currentSection.index}
+            list={currentSection.list}
+            menuItem={menuItem}
+          />
+        }
+      />
     );
   }
 

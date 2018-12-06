@@ -37,11 +37,14 @@ export default function reducer(
         ...state,
         loading: false
       };
-    case getType(asyncActions.fetchSectionById.success):
+    case getType(asyncActions.fetchSectionById.success): {
+      const section = action.payload;
       return {
         ...state,
-        loading: false
+        loading: false,
+        stack: [...state.stack, section]
       };
+    }
 
     case getType(asyncActions.fetchSectionForMenuItem.request):
       return {
@@ -58,7 +61,7 @@ export default function reducer(
       return {
         ...state,
         loading: false,
-        stack: [...state.stack, section]
+        stack: [section]
       };
     }
     default:
@@ -97,7 +100,7 @@ const fetchSectionById = (id: number) => async dispatch => {
     setTimeout(() => resolve(getSectionById(id)), 1500)
   );
 
-  asyncActions.fetchSectionById.success(payload);
+  dispatch(asyncActions.fetchSectionById.success(payload));
 };
 
 export const actions = {

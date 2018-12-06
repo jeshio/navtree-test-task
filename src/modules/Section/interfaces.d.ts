@@ -1,5 +1,5 @@
 export interface Section {
   id: number;
-  title: string;
+  index: string;
   list?: Section[];
 }

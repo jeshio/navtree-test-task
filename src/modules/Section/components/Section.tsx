@@ -1,15 +1,19 @@
 import { withLoader } from "@hocs";
+import { IListProps } from "@modules/Section/components/List";
 import * as React from "react";
 
 interface ISectionProps {
-  title: string;
+  index: string;
   loading: boolean;
+  listComponent: React.ReactElement<IListProps>;
 }
 
-const Section: React.SFC<ISectionProps> = ({ title }) => {
+const Section: React.SFC<ISectionProps> = ({ index, listComponent }) => {
   return (
     <div>
-      <h2>{title}</h2>
+      <h2>Section {index}</h2>
+
+      <div>{listComponent}</div>
     </div>
   );
 };

@@ -20,7 +20,7 @@ export default function<WrappedProps extends object>(
     };
     const lockLayerStyle: CSSProperties = {
       alignItems: "center",
-      backgroundColor: "rgba(255, 255, 255, 0.9)",
+      backgroundColor: "rgba(255, 255, 255, 1)",
       display: isLoading ? "flex" : "none",
       height: "100%",
       justifyContent: "center",
@@ -28,7 +28,6 @@ export default function<WrappedProps extends object>(
       width: "100%",
       zIndex: 999
     };
-    console.log(isLoading);
 
     return (
       <div style={isLoading ? wrapperStyle : undefined}>
