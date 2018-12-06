@@ -2,6 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "moduleResolution": "node",
+    "lib": ["es2015", "dom"],
     "paths": {
       "@*": ["*"],
       "@ui-components/*": ["modules/UI/components/*"],

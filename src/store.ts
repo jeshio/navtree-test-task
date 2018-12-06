@@ -2,6 +2,7 @@ import { routerMiddleware } from "connected-react-router";
 import createHistory from "history/createBrowserHistory";
 import { applyMiddleware, compose, createStore, StoreEnhancer } from "redux";
 import { createLogger } from "redux-logger";
+import thunk from "redux-thunk";
 import rootReducer from "./modules/rootReducer";
 
 declare global {
@@ -14,7 +15,7 @@ export const history = createHistory();
 
 const initialState = {};
 const enhancers = [];
-const middlewares = [routerMiddleware(history)];
+const middlewares = [routerMiddleware(history), thunk];
 
 if (process.env.NODE_ENV === "development") {
   /* eslint-disable-next-line */
